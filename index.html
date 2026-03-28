@@ -10,12 +10,33 @@
       font-family: Arial, sans-serif;
       background-color: #fff0f5;
       color: #333;
+      scroll-behavior: smooth;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: #ffc0cb;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      z-index: 1000;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
     }
 
     header {
-      background: #ffc0cb;
-      padding: 20px;
       text-align: center;
+      padding: 30px;
     }
 
     header img {
@@ -28,7 +49,8 @@
 
     section {
       padding: 30px;
-      margin: 20px;
+      margin: 20px auto;
+      max-width: 900px;
       background: white;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -38,23 +60,15 @@
       color: #ff69b4;
     }
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-    }
-
     ul {
       padding-left: 20px;
     }
 
     footer {
       text-align: center;
-      padding: 15px;
+      padding: 20px;
       background: #ffc0cb;
-    }
-
-    .upload {
-      margin-top: 10px;
+      margin-top: 40px;
     }
 
     .contact a {
@@ -63,76 +77,127 @@
       text-decoration: none;
       margin: 5px 0;
     }
+
+    .music-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
+<nav>
+  <a href="#about">Giới thiệu</a>
+  <a href="#education">Học vấn</a>
+  <a href="#events">Sự kiện</a>
+  <a href="#achievements">Thành tích</a>
+  <a href="#contact">Liên hệ</a>
+</nav>
+
 <header>
   <h1>My Portfolio</h1>
   <img id="profileImage" src="https://via.placeholder.com/120" alt="Profile">
-  <div class="upload">
-    <input type="file" id="imageUpload">
+  <div>
+    <input type="file" id="imageUpload" accept="image/*">
   </div>
 </header>
 
-<div class="container">
+<section id="about">
+  <h2>Giới thiệu bản thân</h2>
+  <p>Viết một đoạn giới thiệu ngắn về bạn...</p>
+</section>
 
-  <section>
-    <h2>Giới thiệu bản thân</h2>
-    <p>Viết một đoạn giới thiệu ngắn về bạn...</p>
-  </section>
+<section id="education">
+  <h2>Học vấn</h2>
+  <ul>
+    <li>Trường...</li>
+    <li>Chuyên ngành...</li>
+  </ul>
+</section>
 
-  <section>
-    <h2>Học vấn</h2>
-    <ul>
-      <li>Trường...</li>
-      <li>Chuyên ngành...</li>
-    </ul>
-  </section>
+<section id="events">
+  <h2>Sự kiện đã tham gia</h2>
+  <ul>
+    <li>Sự kiện 1</li>
+    <li>Sự kiện 2</li>
+  </ul>
+</section>
 
-  <section>
-    <h2>Sự kiện đã tham gia</h2>
-    <ul>
-      <li>Sự kiện 1</li>
-      <li>Sự kiện 2</li>
-    </ul>
-  </section>
+<section id="achievements">
+  <h2>Chứng nhận / Thành tích</h2>
+  <ul>
+    <li>Chứng nhận 1</li>
+    <li>Thành tích 2</li>
+  </ul>
+</section>
 
-  <section>
-    <h2>Chứng nhận / Thành tích</h2>
-    <ul>
-      <li>Chứng nhận 1</li>
-      <li>Thành tích 2</li>
-    </ul>
-  </section>
-
-  <section class="contact">
-    <h2>Liên hệ</h2>
-    <a href="#">Email: your@email.com</a>
+<footer id="contact">
+  <h2>Liên hệ</h2>
+  <div class="contact">
+    <a href="mailto:your@email.com">Email: your@email.com</a>
     <a href="#">Facebook</a>
     <a href="#">LinkedIn</a>
-  </section>
-
-</div>
-
-<footer>
+  </div>
   <p>© 2026 My Portfolio</p>
 </footer>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop autoplay muted>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+<button class="music-btn" onclick="toggleMusic()">🎵 Play Music</button>
 
 <script>
   const imageUpload = document.getElementById('imageUpload');
   const profileImage = document.getElementById('profileImage');
+  const music = document.getElementById('bgMusic');
 
+  // Load saved image
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedImage = localStorage.getItem('profileImage');
+    if (savedImage) {
+      profileImage.src = savedImage;
+    }
+  });
+
+  // Upload & save image
   imageUpload.addEventListener('change', function() {
     const file = this.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = function(e) {
-        profileImage.src = e.target.result;
+        const base64Image = e.target.result;
+        profileImage.src = base64Image;
+        localStorage.setItem('profileImage', base64Image);
       }
       reader.readAsDataURL(file);
     }
   });
+
+  // Toggle music manually
+  function toggleMusic() {
+    if (music.paused) {
+      music.muted = false;
+      music.play();
+    } else {
+      music.pause();
+    }
+  }
+
+  // Enable sound after first interaction (fix autoplay restriction)
+  document.addEventListener('click', () => {
+    if (music.muted) {
+      music.muted = false;
+      music.play().catch(() => {});
+    }
+  }, { once: true });
 </script>
 
 </body>
