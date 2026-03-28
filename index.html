@@ -1,139 +1,139 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <title>Lily Portfolio 🌸</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
     body {
-      background: linear-gradient(135deg, #ffd6ec, #d6f0ff);
-      color: #555;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+    }
+
+    header {
+      background: #ffc0cb;
+      padding: 20px;
       text-align: center;
-      padding: 40px 20px;
     }
 
-    .card {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(20px);
-      padding: 40px;
-      border-radius: 30px;
-      box-shadow: 0 10px 40px rgba(255, 182, 193, 0.4);
-      max-width: 700px;
-      margin: 30px auto;
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
     }
 
-    h1 {
-      font-size: 32px;
-      color: #ff69b4;
-      margin-bottom: 10px;
+    section {
+      padding: 30px;
+      margin: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     h2 {
       color: #ff69b4;
-      margin-bottom: 15px;
     }
 
-    p {
-      font-size: 16px;
-      margin-bottom: 15px;
-      line-height: 1.6;
-    }
-
-    .btn {
-      background: #ff9ecf;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      color: white;
-      cursor: pointer;
-      transition: 0.3s;
-      font-weight: 500;
-    }
-
-    .btn:hover {
-      background: #ff69b4;
-    }
-
-    /* Ảnh đại diện */
-    .profile-img {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 5px solid white;
-      box-shadow: 0 8px 20px rgba(255,105,180,0.4);
-      margin-bottom: 20px;
+    .container {
+      max-width: 900px;
+      margin: auto;
     }
 
     ul {
-      list-style: none;
-      padding: 0;
+      padding-left: 20px;
     }
 
-    li {
-      margin: 8px 0;
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #ffc0cb;
     }
 
+    .upload {
+      margin-top: 10px;
+    }
+
+    .contact a {
+      display: block;
+      color: #ff69b4;
+      text-decoration: none;
+      margin: 5px 0;
+    }
   </style>
 </head>
-
 <body>
 
-  <!-- Trang chính -->
-  <div class="card">
-    <img src="profile.jpg" class="profile-img" alt="Profile">
-
-    <h1>Hi, I'm Thu Uyên 🌸</h1>
-    <p>Nice to meet you! ✨</p>
-
-    <button class="btn" onclick="toggleMusic()">🎵 Play / Pause Music</button>
+<header>
+  <h1>My Portfolio</h1>
+  <img id="profileImage" src="https://via.placeholder.com/120" alt="Profile">
+  <div class="upload">
+    <input type="file" id="imageUpload">
   </div>
+</header>
 
-  <!-- About Me -->
-  <div class="card">
-    <h2>About Me 💖</h2>
-    <p>
-      Xin chào! Mình là Thu Uyên.  
-      Hiện tại mình đang là sinh viên năm 2, chuyên ngành Kinh tế đối ngoại trường Đại học Ngoại Thương. 
-    </p>
-  </div>
+<div class="container">
 
-  <!-- Thành tích -->
-  <div class="card">
-    <h2>Một số cột mốc đáng nhớ 🏆</h2>
+  <section>
+    <h2>Giới thiệu bản thân</h2>
+    <p>Viết một đoạn giới thiệu ngắn về bạn...</p>
+  </section>
+
+  <section>
+    <h2>Học vấn</h2>
     <ul>
-      <li>🥇 Giải Nhì HSG cấp tỉnh môn tiếng Anh 2 năm liên tiếp </li>
-      <li>📜Đạt IELTS 7.5 trong lần đầu tiên thi </li>
-      <li>💻 Tự xây dựng portfolio cá nhân</li>
+      <li>Trường...</li>
+      <li>Chuyên ngành...</li>
     </ul>
-  </div>
+  </section>
 
-  <!-- Nhạc nền -->
-  <audio id="bg-music" loop>
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+  <section>
+    <h2>Sự kiện đã tham gia</h2>
+    <ul>
+      <li>Sự kiện 1</li>
+      <li>Sự kiện 2</li>
+    </ul>
+  </section>
 
-  <script>
-    const music = document.getElementById("bg-music");
+  <section>
+    <h2>Chứng nhận / Thành tích</h2>
+    <ul>
+      <li>Chứng nhận 1</li>
+      <li>Thành tích 2</li>
+    </ul>
+  </section>
 
-    function toggleMusic() {
-      if (music.paused) {
-        music.play();
-      } else {
-        music.pause();
+  <section class="contact">
+    <h2>Liên hệ</h2>
+    <a href="#">Email: your@email.com</a>
+    <a href="#">Facebook</a>
+    <a href="#">LinkedIn</a>
+  </section>
+
+</div>
+
+<footer>
+  <p>© 2026 My Portfolio</p>
+</footer>
+
+<script>
+  const imageUpload = document.getElementById('imageUpload');
+  const profileImage = document.getElementById('profileImage');
+
+  imageUpload.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        profileImage.src = e.target.result;
       }
+      reader.readAsDataURL(file);
     }
-  </script>
+  });
+</script>
 
 </body>
 </html>
